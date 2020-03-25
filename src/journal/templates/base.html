@@ -1,0 +1,88 @@
+{% load static %}
+
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <!-- スマホ対応 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- My style css -->
+    <link rel="stylesheet" href="{% static 'css/journal_list.css' %}">
+    {% block head %}{% endblock %}
+  </head>
+
+  <body>
+
+	<div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+          <div class="container">
+            <a class="navbar-brand" href="{% url 'journal:diary_list' %}">PRIVATE BLOG</a>
+            
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item {% block active_inquiry %}{% endblock %}">
+                <a class="nav-link" href="{% url 'journal:inquiry' %}">お問い合わせ</a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+                </li>
+              {% else %}
+                <li class="nav-item {% block active_signup %}{% endblock %}">
+                  <a class="nav-link" href="{% url 'account_signup' %}">サインアップ</a>
+                </li>              
+                <li class="nav-item {% block active_login %}{% endblock %}">
+                    <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+
+        {% block header%}{% endblock %}
+
+        {% if messages %}
+          <div class="container">
+              <div class="row">
+                  <div class="div-style w-100 h-50">
+                      <ul class="messages" style="list-style: none;">
+                          {% for message in messages %}
+                          <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                              {{ message }}
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        {% endif %}
+
+        {% block contents%}{% endblock %}
+
+        <!-- Footer -->
+        <footer class="py-5 bg-info">
+          <div class="container">
+            <p class="m-0 text-center text-white small">Copyright &copy; PRIVATE BLOG</p>
+            githubのリンクはる
+          </div>
+          <!-- /.container -->
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  	</div>
+  </body>
+
+</html>

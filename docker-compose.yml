@@ -1,0 +1,39 @@
+version: '3'
+# データベースのデータを永続化する
+# 作成されたvolumeは docker volume ls で確認できる
+volumes:
+  dbdata:
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+      - ./src/static:/static
+    depends_on:
+      - web
+  db:
+    image: postgres:11
+    container_name: db
+    ports:
+      - "5432:5432"
+     # トップレベルで指定したvolumeをマウントする
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: password # settings.pyで設定した値と同じにする
+  web:
+    build: ./web
+    container_name: web
+     # uwsgiを使ってアプリケーションを起動させる
+    command: uwsgi --socket :8001 --module notebook.wsgi
+    volumes:
+      - ./src:/code
+      - ./src/static:/static
+    expose:
+      - "8001"
+    depends_on:
+      - db
