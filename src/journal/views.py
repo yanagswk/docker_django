@@ -26,6 +26,11 @@ class JournalListView(generic.ListView):
         diaries = Journal.objects.order_by('-created_at')
         return diaries
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['heading'] = 'ブログ一覧'
+        return context
+
 
 class JournalDetailView(generic.DetailView):
     model = Journal
