@@ -2,4 +2,4 @@
 *.pyc
 *.pyo
 __pycach__
-
+/admin/

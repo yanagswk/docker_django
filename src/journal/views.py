@@ -101,6 +101,7 @@ class TagListView(generic.ListView):
 class CategoryJournalView(generic.ListView):
     model = Journal
     template_name = 'category_journal.html'
+    paginate_by = 3
 
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
@@ -117,6 +118,7 @@ class CategoryJournalView(generic.ListView):
 class TagJournalView(generic.ListView):
     model = Journal
     template_name = 'tag_journal.html'
+    paginate_by = 3
 
     def get_queryset(self):
         tag_slug = self.kwargs['tag_slug']

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}{% if query %}{{ query }}{% endif %} | {{ block.super }}{% endblock %}
 {% block description %}検索ワード「{% if query %}{{ query }}{% endif %}」での検索結果ページです。{% endblock %}
@@ -8,41 +8,32 @@
 <div class="div-style w-100">
   <div class="container">
     <div class="row">
-      <main class="col-md-8">
-        <h1 class="mb-4">「{% if query %}{{ query }}{% endif %}」の検索結果</h1>
-        <p class="text-right">{{ page_obj.start_index }}-{{ page_obj.end_index }}件（{{ paginator.count }}件）</p>
-        
-        <!-- diary_list -->
 
-        <h1 class="section-title">{{ heading }}</h1>
-
-        {% for journal in journal_list %}
-
-        <article class="post-preview">
-            <a href="{% url 'journal:diary_detail' journal.pk %}">
-              <h2 class="post-title">{{ journal.title }}</h2></b>
-              <p class="post-meta">
-                  {{ journal.created_at | date:'Y年n月j日' }}
-              </p>
-              <div class='contents'>
-                  <p>{{ journal.content|truncatechars:30 }}</p>
-              </div>
-            </a>
-        </article>
-          {% empty %}
-              <p>日記がありません。</p>
-          {% endfor %}
-        {% include "journal/snippets/pagination.html" %}
-      </main>
-      
-      <aside class="col-md-4">
-        {% include "journal/snippets/sidebar.html" %}
-      </aside>
+      <div class="col-6">
+        <div class="section-title">「{% if query %}{{ query }}{% endif %}」の検索結果</div>
       </div>
+      <div class="col-6">
+        <p><p>{{ page_obj.start_index }}-{{ page_obj.end_index }}件（{{ paginator.count }}件）</p></p>
+      </div>
+
+
+      <div class="container">
+        <div class="row">
+          <main class="col-8">
+          {% include "journal/snippets/diary_main_list.html" %}
+          </main>
+
+          <aside class="col-4">
+              {% include "journal/snippets/sidebar.html" %}
+          </aside>
+        </div>  
+      </div>
+      {% include "journal/snippets/pagination.html" %}
     </div>
   </div>
 </div>
 {% endblock %}
+
 
 
 

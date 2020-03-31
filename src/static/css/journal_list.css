@@ -76,5 +76,32 @@ li {
 }
 
 
+.category_style {
+    float: left;
+    margin-right: 5px;
+    background: limegreen;
+    border-radius: 5px;
+}
+
+.tag_style {
+    float: left;
+    margin-right: 5px;
+    background: darkorange;
+    border-radius: 5px;
+}
+
+.detail_size {
+    font-size: 12px;
+}
 
 
+.detail_title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+.search_resalt {
+    font-size: 32px;
+    margin-bottom: 4px;
+}

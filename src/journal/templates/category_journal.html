@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}カテゴリ一覧 | {{ block.super }}{% endblock %}
+{% block title %}カテゴリ一覧{{ block.super }}{% endblock %}
 {% block description %}カテゴリ一覧ページです。{% endblock %}
 
 {% block contents %}
@@ -8,23 +8,28 @@
 <div class="div-style w-100">
   <div class="container">
     <div class="row">
-      <main class="col-md-8">
-        <h1>「{{ category.name }}」の投稿一覧</h1>
-        <ul>
-          {% for journal in object_list %}
-          {% if user.is_authenticated or journal.is_public %}
-          <li>{% if not journal.is_public %}[下書き] {% endif %}<a href="{% url 'journal:diary_detail' journal.id %}">{{ journal.title }}</a></li>
-          {% endif %}
-          {% empty %}
-          <li>まだ投稿はありません。</li>
-          {% endfor %}
-        </ul>
-      </main>
+      
+      <div class="col-6">
+        <div class="section-title">「{{ category.name }}」の投稿一覧</div>
+      </div>
+      <div class="col-6">
+        <p><p>{{ page_obj.start_index }}-{{ page_obj.end_index }}件（{{ paginator.count }}件）</p></p>
+      </div>
 
-      <aside class="col-md-4">
-        {% include "journal/snippets/sidebar.html" %}
-      </aside>
+
+      <div class="container">
+        <div class="row">
+          <main class="col-md-8">
+            {% include "journal/snippets/diary_main_list.html" %}
+          </main>
+
+          <aside class="col-md-4">
+            {% include "journal/snippets/sidebar.html" %}
+          </aside>
+        </div>
+      </div>
     </div>
+    {% include "journal/snippets/pagination.html" %}
   </div>
 </div>
 {% endblock %}
