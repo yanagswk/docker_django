@@ -1,10 +1,8 @@
 {% load static %}
 
 <html lang="ja">
-
   <head>
     <meta charset="utf-8">
-    <!-- スマホ対応 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -26,17 +24,15 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
           <div class="container">
             <a class="navbar-brand" href="{% url 'journal:diary_list' %}">PRIVATE BLOG</a>
-            
             <ul class="navbar-nav mr-auto">
               <li class="nav-item {% block active_inquiry %}{% endblock %}">
                 <a class="nav-link" href="{% url 'journal:inquiry' %}">お問い合わせ</a>
               </li>
             </ul>
-
             <ul class="navbar-nav ml-auto">
               {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+                  <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
                 </li>
               {% else %}
                 <li class="nav-item {% block active_signup %}{% endblock %}">
@@ -55,7 +51,7 @@
         {% if messages %}
           <div class="container">
               <div class="row">
-                  <div class="div-style w-100 h-50">
+                  <div class="div-style">
                       <ul class="messages" style="list-style: none;">
                           {% for message in messages %}
                           <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
@@ -70,13 +66,12 @@
 
         {% block contents%}{% endblock %}
 
-        <!-- Footer -->
+        <!-- フッター -->
         <footer class="py-5 bg-info">
           <div class="container">
             <p class="m-0 text-center text-white small">Copyright &copy; PRIVATE BLOG</p>
             <p class="m-0 text-center text-white small"><a href="https://github.com/yanagswk/docker_django.git">Github</a></p>
           </div>
-          <!-- /.container -->
         </footer>
 
         <!-- Bootstrap core JavaScript -->
@@ -84,5 +79,4 @@
         <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   	</div>
   </body>
-
 </html>

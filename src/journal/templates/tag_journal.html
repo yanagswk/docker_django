@@ -1,27 +1,22 @@
 {% extends "base.html" %}
-
 {% block title %}カテゴリ一覧 | {{ block.super }}{% endblock %}
 {% block description %}カテゴリ一覧ページです。{% endblock %}
-
 {% block contents %}
 
-<div class="div-style w-100">
+<div class="div-style">
   <div class="container">
     <div class="row">
-
       <div class="col-6">
         <div class="section-title">「{{ tag.name }}」の投稿一覧</div>
       </div>
       <div class="col-6">
         <p><p>{{ page_obj.start_index }}-{{ page_obj.end_index }}件（{{ paginator.count }}件）</p></p>
       </div>
-
       <div class="container">
         <div class="row">
           <main class="col-md-8">
             {% include "journal/snippets/diary_main_list.html" %}
           </main>
-
           <aside class="col-md-4">
             {% include "journal/snippets/sidebar.html" %}
           </aside>
