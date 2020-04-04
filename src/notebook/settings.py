@@ -138,7 +138,7 @@ AUTHENTICATION_BACKENDS = (
 
 
 # ログイン/ログアウト後の遷移先を設定
-LOGIN_REDIRECT_URL = 'journal:diary_list'
+LOGIN_REDIRECT_URL = 'journal:journal_list'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 # ログアウトリンクのクリック一発でログアウトする設定

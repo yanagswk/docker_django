@@ -6,11 +6,11 @@ from .views import comment_approve, comment_remove, reply_approve, reply_remove
 app_name = 'journal'
 
 urlpatterns = [
-    path('', views.JournalListView.as_view(), name="diary_list"),
-    path('diary-detail/<int:pk>/', views.JournalDetailView.as_view(), name="diary_detail"),
-    path('diary-create/', views.JournalCreateView.as_view(), name="diary_create"),
-    path('diary-update/<int:pk>/', views.JournalUpdateView.as_view(), name="diary_update"),
-    path('diary-delete/<int:pk>/', views.JournalDeleteView.as_view(), name="diary_delete"),
+    path('', views.JournalListView.as_view(), name="journal_list"),
+    path('journal-detail/<int:pk>/', views.JournalDetailView.as_view(), name="journal_detail"),
+    path('journal-create/', views.JournalCreateView.as_view(), name='journal_create'),
+    path('journal-update/<int:pk>/', views.JournalUpdateView.as_view(), name="journal_update"),
+    path('journal-delete/<int:pk>/', views.JournalDeleteView.as_view(), name="journal_delete"),
     path('categories/', views.CategoryListView.as_view(), name='category_list'),
     path('tags/', views.TagListView.as_view(), name='tag_list'),
     path('category/<str:category_slug>/', views.CategoryJournalView.as_view(), name='category_journal'),

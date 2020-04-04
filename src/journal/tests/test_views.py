@@ -42,10 +42,10 @@ class TestDiaryCreateView(LoggedInTestCase):
                   'picture3': ''}
 
         # 新規日記作成処理(Post)を実行
-        response = self.client.post(reverse_lazy('journal:diary_create'), params)
+        response = self.client.post(reverse_lazy('journal:journal_create'), params)
 
         # 日記リストページへのリダイレクトを検証
-        self.assertRedirects(response, reverse_lazy('journal:diary_list'))
+        self.assertRedirects(response, reverse_lazy('journal:journal_list'))
 
         # 日記データがDBに登録されたかを検証
         self.assertEqual(Journal.objects.filter(title='テストタイトル').count(), 1)
@@ -54,7 +54,7 @@ class TestDiaryCreateView(LoggedInTestCase):
         """新規日記作成処理が失敗することを検証する"""
 
         # 新規日記作成処理(Post)を実行
-        response = self.client.post(reverse_lazy('journal:diary_create'))
+        response = self.client.post(reverse_lazy('journal:journal_create'))
 
         # 必須フォームフィールドが未入力によりエラーになることを検証
         self.assertFormError(response, 'form', 'title', 'このフィールドは必須です。')

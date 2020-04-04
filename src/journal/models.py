@@ -12,7 +12,6 @@ class Category(models.Model):
         return self.name
 
 
-
 class Tag(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
@@ -20,7 +19,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class Journal(models.Model):
@@ -45,7 +43,6 @@ class Journal(models.Model):
         return self.title
 
 
-
 class Comment(models.Model):
     journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=50)
@@ -64,7 +61,6 @@ class Comment(models.Model):
         return self.content
 
 
-
 class Reply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
     name = models.CharField(max_length=50)
@@ -78,5 +74,4 @@ class Reply(models.Model):
 
     def __str__(self):
         return self.content
- 
  

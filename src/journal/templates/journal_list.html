@@ -8,14 +8,14 @@
 <div class="div-style">
     <div class="container">
         <div class="clearfix">
-            <a class="btn btn-danger float-right" href="{% url 'journal:diary_create' %}">新規作成</a>
+            <a class="btn btn-danger float-right" href="{% url 'journal:journal_create' %}">新規作成</a>
             {% include "journal/snippets/search_form.html" %}
         </div>
         <div class="section-title">ブログ一覧</div>
         <div class="container">
             <div class="row">
                 <main class="col-md-8">
-                    {% include "journal/snippets/diary_main_list.html" %}
+                    {% include "journal/snippets/journal_main_list.html" %}
                 </main>
                 <aside class="col-md-4">
                     {% include "journal/snippets/sidebar.html" %}
