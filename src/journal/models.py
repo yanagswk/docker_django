@@ -49,6 +49,7 @@ class Comment(models.Model):
     content = models.TextField(verbose_name='コメント', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     is_public = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-timestamp']
@@ -67,6 +68,7 @@ class Reply(models.Model):
     content = models.TextField(verbose_name='返信', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     is_public = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
 
     def approve(self):
         self.approved = True

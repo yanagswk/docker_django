@@ -5,10 +5,6 @@ from django.forms import ModelForm, TextInput, Textarea
 from .models import Journal, Comment, Reply
 
 
-
-
-
-
 class JournalInquiryForm(forms.Form):
     name = forms.CharField(label='お名前', max_length=30)
     email = forms.EmailField(label='メールアドレス')
@@ -19,16 +15,16 @@ class JournalInquiryForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         self.fields['name'].widget.attrs['class'] = 'form-control col-9'
-        self.fields['name'].widget.attrs['placeholder'] = 'お名前をここに入力してください。'
+        self.fields['name'].widget.attrs['placeholder'] = 'お名前を入力してください。'
 
         self.fields['email'].widget.attrs['class'] = 'form-control col-11'
-        self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスをここに入力してください。'
+        self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスを入力してください。'
 
         self.fields['title'].widget.attrs['class'] = 'form-control col-11'
-        self.fields['title'].widget.attrs['placeholder'] = 'タイトルをここに入力してください。'
+        self.fields['title'].widget.attrs['placeholder'] = 'タイトルを入力してください。'
 
         self.fields['message'].widget.attrs['class'] = 'form-control col-12'
-        self.fields['message'].widget.attrs['placeholder'] = 'メッセージをここに入力してください。'
+        self.fields['message'].widget.attrs['placeholder'] = 'メッセージを入力してください。'
 
     def send_email(self):
         name = self.cleaned_data['name']
@@ -51,12 +47,6 @@ class JournalInquiryForm(forms.Form):
 
 
 
-
-
-
-
-
-
 class JournalCreateForm(forms.ModelForm):
     class Meta:
         model = Journal
@@ -66,8 +56,6 @@ class JournalCreateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-
-
 
 
 
