@@ -4,17 +4,17 @@
 {% block contents %}
 
 <div class="container">
-  <div class="row">
-    <main class="col-md-8">
-      <h1 class="mb-4">コメント投稿フォーム</h1>
-      <p>To:「{{ journal.title }}」</p>
-      <form method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">送信</button>
-      </form>
-    </main>
-    <aside class="col-md-4">
-    </aside>
-  </div>
+    <div class="row">
+        <main class="col-md-8">
+            <h1 class="mb-4">コメント投稿フォーム</h1>
+            <p>To:「{{ journal.title }}」</p>
+            <form method="POST">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">送信</button>
+            </form>
+        </main>
+        <aside class="col-md-4">
+        </aside>
+    </div>
 </div>
 {% endblock %}

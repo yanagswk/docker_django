@@ -2,6 +2,7 @@
 {% for journal in journal_list %}
     {% if user.is_authenticated or journal.is_public %}
         <article class="post-preview card mb-3">
+
             <a href="{% url 'journal:journal_detail' journal.pk %}">
                 <h2 class="post-title">{{ journal.title }}</h2></b>
                 <p class="post-meta">
@@ -11,6 +12,7 @@
                     <p>{{ journal.content|truncatechars:30 }}</p>
                 </div>
             </a>
+            
         </article>
     {% endif %}
 {% empty %}

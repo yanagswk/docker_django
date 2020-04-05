@@ -5,7 +5,7 @@
 {% block contents %}
 
 <div class="container">
-    <div class="div-style">
+    <div class="div-style w-100">
         <div class="container">
             <div class="row">
                 <main class="col-md-8">
@@ -92,20 +92,22 @@
                     <article class="comment-area">
                         <a class="btn btn-primary my-3" href="{% url 'journal:comment_form' journal.pk %}">コメントを投稿する</a>
                         {% include "journal/snippets/comments.html" %}
-                    </article>
+                    </article>     
+                </main>
+                <aside class="col-md-4">
+                    {% include "journal/snippets/sidebar.html" %}
+                </aside>
 
-                    <h5>関連記事</h5>
+                <h5>関連記事</h5>
+                <ul>
                     {% if journal.relation.all %}
                         {% for journal in journal.relation.all %}
                             <a href="{% url 'journal:journal_detail' journal.pk %}"><li>{{ journal.title }}</li></a>
                         {% endfor %}
                     {% else %}
                         <h6>関連記事がありません</h6>
-                    {% endif %}             
-                </main>
-                <aside class="col-md-4">
-                    {% include "journal/snippets/sidebar.html" %}
-                </aside>
+                    {% endif %}  
+                </ul>
             </div>
         </div>
     </div>
