@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class JournalListView(generic.ListView):
     model = Journal
     template_name = 'journal_list.html'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         diaries = Journal.objects.order_by('-created_at')
@@ -94,7 +94,7 @@ class TagListView(generic.ListView):
 class CategoryJournalView(generic.ListView):
     model = Journal
     template_name = 'category_journal.html'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         category_slug = self.kwargs['category_slug']
@@ -111,7 +111,7 @@ class CategoryJournalView(generic.ListView):
 class TagJournalView(generic.ListView):
     model = Journal
     template_name = 'tag_journal.html'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         tag_slug = self.kwargs['tag_slug']
@@ -128,7 +128,7 @@ class TagJournalView(generic.ListView):
 class SearchJournalView(generic.ListView):
     model = Journal
     template_name = 'search_journal.html'
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         query = self.request.GET.get('q', None)
