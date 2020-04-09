@@ -22,7 +22,7 @@
             <!-- Navigation -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
                 <div class="container">
-                    <a class="navbar-brand" href="{% url 'journal:journal_list' %}">PRIVATE BLOG</a>
+                    <a class="navbar-brand" href="{% url 'journal:journal_list' %}">My Journal</a>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item {% block active_inquiry %}{% endblock %}">
                             <a class="nav-link" href="{% url 'journal:inquiry' %}">お問い合わせ</a>
@@ -68,8 +68,7 @@
             <!-- フッター -->
             <footer class="py-5 bg-info">
                 <div class="container">
-                    <p class="m-0 text-center text-white small">Copyright &copy; PRIVATE BLOG</p>
-                    <p class="m-0 text-center text-white small"><a href="https://github.com/yanagswk/docker_django.git">Github</a></p>
+                    <p class="m-0 text-center text-white small">Copyright &copy; My Journal</p>
                 </div>
             </footer>
 

@@ -1,6 +1,5 @@
 version: '3'
-# データベースのデータを永続化する
-# 作成されたvolumeは docker volume ls で確認できる
+# データベースのデータを永続化
 volumes:
   dbdata:
 services:
@@ -24,11 +23,11 @@ services:
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     environment:
-      POSTGRES_PASSWORD: password # settings.pyで設定した値と同じにする
+      POSTGRES_PASSWORD: password # settings.pyで設定した値と同じ
   web:
     build: ./web
     container_name: web
-     # uwsgiを使ってアプリケーションを起動させる
+     # uwsgiを使ってアプリケーションを起動
     command: uwsgi --socket :8001 --module notebook.wsgi
     volumes:
       - ./src:/code
