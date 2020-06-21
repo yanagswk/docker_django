@@ -8,6 +8,7 @@
         <meta name="author" content="">
 
         <title>{% block title %}{% endblock %}</title>
+        
 
         <!-- Bootstrap core CSS -->
         <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -30,6 +31,9 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <div class="navbar-text">ようこそ{{ user.get_username }}さん</div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
                         </li>
@@ -75,6 +79,7 @@
             <!-- Bootstrap core JavaScript -->
             <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
             <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+            <script src="{% static 'vendor/journal.js' %}"></script>
         </div>
     </body>
 </html>
