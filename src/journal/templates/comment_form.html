@@ -10,6 +10,9 @@
             <p>To:「{{ journal.title }}」</p>
             <form method="POST">{% csrf_token %}
                 {{ form.as_p }}
+                <!-- {{ form.name }}
+                {{ form.content }} -->
+
                 <button type="submit" class="btn btn-primary">送信</button>
             </form>
         </main>

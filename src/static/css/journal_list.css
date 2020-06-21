@@ -76,6 +76,13 @@ footer {
     border-radius: 5px;
 }
 
+/* .relation_style {
+    float: left;
+    margin-right: 5px;
+    background: blue;
+    border-radius: 5px;
+} */
+
 .detail_size {
     font-size: 12px;
 }
@@ -89,3 +96,6 @@ footer {
     font-size: 32px;
     margin-bottom: 4px;
 }
+
+
+
