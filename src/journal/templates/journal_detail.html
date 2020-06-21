@@ -8,12 +8,13 @@
     <div class="div-style w-100">
         <div class="container">
             <div class="row">
-                <main class="col-md-8">
+                <main class="col-md-9">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
+                            {{ object.user }}&emsp;ユーザー
                             <div class="detail_title">{{ object.title }}</div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="detail_size">カテゴリー</div>
                             <div class="category_style">{{ object.category.name }}</div>
                         </div>
@@ -37,10 +38,12 @@
                         <div class="col-6">
                             更新日時&emsp;&emsp;&emsp;{{ object.updated_at }}
                         </div>
+                        {% if request.user.id == object.user.id %}
                         <div class='col-6 text-right'>
                             <a class="btn btn-success" href="{% url 'journal:journal_update' object.pk %}">編集</a>
                             <a class="btn btn-danger" href="{% url 'journal:journal_delete' object.pk %}">削除</a>
                         </div>
+                        {% endif %}
                     </div>
 
                     <hr>
@@ -94,19 +97,19 @@
 
                     <article class="comment-area">
                         <a class="btn btn-primary my-3" href="{% url 'journal:comment_form' journal.pk %}">コメントを投稿する</a>
-                        {% include "journal/snippets/comments.html" %}
+                        {% if journal.comments.all %}
+                            <input type="button" id="butom" value="コメント表示/非表示">
+                            <div id="comments">
+                                {% include "journal/snippets/comments.html" %}
+                            </div>
+                        {% else %}
+                            <h6>コメントがありません</h6>
+                        {% endif %}
                     </article>    
                     
                     <hr>
 
-                </main>
-                <aside class="col-md-4">
-                    {% include "journal/snippets/sidebar.html" %}
-                </aside>
-
-                
-
-                <h5>関連記事</h5>
+                <h6>関連記事</h6>
                 <ul>
                     {% if journal.relation.all %}
                         {% for journal in journal.relation.all %}
@@ -116,6 +119,24 @@
                         <h6>関連記事がありません</h6>
                     {% endif %}  
                 </ul>
+
+                </main>
+                <aside class="col-md-3">
+                    {% include "journal/snippets/sidebar.html" %}
+                </aside>
+
+                
+
+                <!-- <h6>関連記事</h6>
+                <ul>
+                    {% if journal.relation.all %}
+                        {% for journal in journal.relation.all %}
+                            <a href="{% url 'journal:journal_detail' journal.pk %}"><li>{{ journal.title }}</li></a>
+                        {% endfor %}
+                    {% else %}
+                        <h6>関連記事がありません</h6>
+                    {% endif %}  
+                </ul> -->
             </div>
         </div>
     </div>
