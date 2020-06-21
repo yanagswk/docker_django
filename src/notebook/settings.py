@@ -15,12 +15,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'j@2gc*gqiq@7802*_5%v$l4a-r4g)vao2dykc&0ip2#)k2la5b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = []
 
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Application definition
 
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'django_ses'
 ]
 
 MIDDLEWARE = [
@@ -75,15 +74,14 @@ WSGI_APPLICATION = 'notebook.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# データベース設定
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'my_journal',
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
@@ -124,10 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-
-
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
 
 
 SITE_ID = 1
@@ -136,7 +131,6 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',  # 一般ユーザー用(メールアドレス認証)
     'django.contrib.auth.backends.ModelBackend',  # 管理サイト用(ユーザー名認証)
 )
-
 
 
 # ログイン/ログアウト後の遷移先を設定
@@ -157,21 +151,15 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+# )
 
-MEDIA_ROOT = '/usr/share/nginx/html/media'
-STATIC_ROOT = '/usr/share/nginx/html/static'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 STATIC_URL = '/static/'
-
-
-
-AWS_SES_ACCESS_KEY_ID = os.environ.get('AWS_SES_ACCESS_KEY_ID')
-AWS_SES_SECRET_ACCESS_KEY = os.environ.get('AWS_SES_SECRET_ACCESS_KEY')
-EMAIL_BACKEND = 'django_ses.SESBackend'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 
 MESSAGE_TAGS = {
@@ -179,4 +167,46 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert alert-warning',
     messages.SUCCESS: 'alert alert-success',
     messages.INFO: 'alert alert-info',
+}
+
+
+# ロギング設定
+LOGGING = {
+    'version': 1,  # 1固定
+    'disable_existing_loggers': False,
+
+    # ロガーの設定
+    'loggers': {
+        # Djangoが利用するロガー
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        # diaryアプリケーションが利用するロガー
+        'diary': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+
+    # ハンドラの設定
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'dev'
+        },
+    },
+
+    # フォーマッタの設定
+    'formatters': {
+        'dev': {
+            'format': '\t'.join([
+                '%(asctime)s',
+                '[%(levelname)s]',
+                '%(pathname)s(Line:%(lineno)d)',
+                '%(message)s'
+            ])
+        },
+    }
 }
